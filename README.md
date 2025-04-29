@@ -15,18 +15,18 @@ A command-line tool that provides a unified interface for running scripts across
   - Remembers your last used script for each project directory
   - Makes repetitive script execution faster by pre-selecting your previously used script
 
-## Installation
-
-### Install from JSR
+## Installation / Upgrade
 
 ```bash
-deno install -g -n uni-run \
+deno install -gf -n uni-run \
   --allow-read=.,$HOME/.cache/uni-run \
   --allow-write=$HOME/.cache/uni-run \
   --allow-env=HOME,USERPROFILE \
   --allow-run=npm,yarn,pnpm,bun,deno \
   jsr:@miyaoka/uni-run/cli
 ```
+
+> Note: The `-f` flag forces overwriting of any existing installation. You can safely run this command for first-time installation or to upgrade to the latest version.
 
 Permissions are restricted for better security:
 
@@ -38,6 +38,12 @@ Permissions are restricted for better security:
   - Required to locate user's home directory for cache
 - `--allow-run=npm,yarn,pnpm,bun,deno`: Only run specific package managers
   - Required to execute scripts with the appropriate package manager
+
+### What's new in v0.2.0
+
+- Improved CLI argument handling for different package managers
+- Better command-line help with examples (`uni-run -h`)
+- Support for passing arguments to scripts (`uni-run test -- --watch`)
 
 ### Uninstall
 
