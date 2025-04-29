@@ -3,19 +3,19 @@ import { join } from "@std/path";
 import type { ProjectType } from "../types.ts";
 
 /**
- * プロジェクトディレクトリからプロジェクトタイプを検出する
+ * Detect project type from project directory
  *
- * @param dir プロジェクトディレクトリパス
- * @returns 検出されたプロジェクトタイプ、検出できない場合はnull
+ * @param dir Project directory path
+ * @returns Detected project type, or null if not detected
  */
 export async function detectProjectType(dir: string): Promise<ProjectType> {
-  // ロックファイルによる検出（最も信頼性が高い）
+  // Detection by lock files (most reliable)
   if (await exists(join(dir, "yarn.lock"))) return "yarn";
   if (await exists(join(dir, "pnpm-lock.yaml"))) return "pnpm";
   if (await exists(join(dir, "package-lock.json"))) return "npm";
   if (await exists(join(dir, "bun.lockb"))) return "bun";
 
-  // 設定ファイルによる検出
+  // Detection by configuration files
   if (
     (await exists(join(dir, "deno.json"))) ||
     (await exists(join(dir, "deno.jsonc")))
@@ -28,7 +28,7 @@ export async function detectProjectType(dir: string): Promise<ProjectType> {
       const content = await Deno.readTextFile(join(dir, "package.json"));
       const pkg = JSON.parse(content);
 
-      // packageManagerフィールドによる判断
+      // Determine by packageManager field
       if (pkg.packageManager) {
         if (pkg.packageManager.startsWith("pnpm")) return "pnpm";
         if (pkg.packageManager.startsWith("yarn")) return "yarn";
@@ -36,7 +36,7 @@ export async function detectProjectType(dir: string): Promise<ProjectType> {
         if (pkg.packageManager.startsWith("bun")) return "bun";
       }
 
-      return "npm"; // デフォルトはnpm
+      return "npm"; // Default is npm
     } catch {
       return "npm";
     }

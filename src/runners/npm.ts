@@ -4,14 +4,14 @@ import { executeCommand } from "../utils.ts";
 import type { Runner, Script } from "../types.ts";
 
 /**
- * npmプロジェクト用スクリプトランナーを作成
+ * Create script runner for npm projects
  *
- * @param cwd 現在の作業ディレクトリ
- * @returns スクリプトランナーオブジェクト
+ * @param cwd Current working directory
+ * @returns Script runner object
  */
 export function createNpmRunner(cwd: string): Runner {
   /**
-   * 利用可能なスクリプト一覧を取得
+   * Get list of available scripts
    */
   async function getScripts(): Promise<Script[]> {
     const packageJsonPath = join(cwd, "package.json");
@@ -36,7 +36,7 @@ export function createNpmRunner(cwd: string): Runner {
   }
 
   /**
-   * 指定されたスクリプトが存在するか確認
+   * Check if the specified script exists
    */
   async function hasScript(name: string): Promise<boolean> {
     const scripts = await getScripts();
@@ -44,22 +44,22 @@ export function createNpmRunner(cwd: string): Runner {
   }
 
   /**
-   * 実行コマンド文字列を取得
+   * Get command string for execution
    */
   function getCommandString(name: string): string {
     return `npm run ${name}`;
   }
 
   /**
-   * スクリプトを実行
+   * Run script
    */
   async function runScript(name: string, args: string[] = []): Promise<void> {
-    // --silentフラグを追加して余分な出力を抑制
+    // Add --silent flag to suppress extra output
     const cmd = ["npm", "run", "--silent", name, ...args];
     await executeCommand(cmd, cwd);
   }
 
-  // スクリプトランナーオブジェクトを返す
+  // Return script runner object
   return {
     getScripts,
     hasScript,
