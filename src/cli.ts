@@ -16,11 +16,17 @@ const VERSION = denoJson.version;
 const cli = new Command()
   .name("uni-run")
   .version(VERSION)
+  .versionOption("-v, --version", "Show version information")
   .description(
     "Universal script runner for npm, yarn, pnpm, bun, and deno projects"
   )
+  .usage("[options] [script] [--args]")
   .arguments("[...args:string]")
   .option("-l, --list", "List available scripts")
+  .example("Interactive mode", "uni-run")
+  .example("Run a specific script", "uni-run dev")
+  .example("Run with arguments", "uni-run test -- --watch")
+  .example("Pass build flags", "uni-run build -- --mode production")
   .action(async function (options, ...args: Array<string>) {
     // Extract script name from args (safely)
     const script = args.length > 0 ? args[0] : undefined;

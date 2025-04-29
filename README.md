@@ -58,8 +58,13 @@ rm -rf $HOME/.cache/uni-run
 # Detect project type and select script interactively
 uni-run
 
-# List available scripts
-uni-run --list
+# Run a specific script
+uni-run dev
+
+# Run a script with arguments (using -- separator)
+uni-run test -- --watch
+uni-run build -- --mode production
+uni-run start -- --port 3000
 ```
 
 ## Supported Package Managers
