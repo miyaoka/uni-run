@@ -1,6 +1,6 @@
 {
   "name": "@miyaoka/uni-run",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "license": "MIT",
   "description": "Universal script runner for npm, yarn, pnpm, bun, and deno projects",
   "exports": {
