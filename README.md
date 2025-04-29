@@ -12,6 +12,8 @@ A command-line tool that provides a unified interface for running scripts across
 - Automatic project type detection (npm, yarn, pnpm, bun, deno)
 - Interactive script selection UI
 - Script selection history caching
+  - Remembers your last used script for each project directory
+  - Makes repetitive script execution faster by pre-selecting your previously used script
 
 ## Installation
 
@@ -40,7 +42,12 @@ Permissions are restricted for better security:
 ### Uninstall
 
 ```bash
+# Remove the executable
 deno uninstall -g uni-run
+
+# Remove cache directory (optional)
+# This cache stores your command selection history
+rm -rf $HOME/.cache/uni-run
 ```
 
 ## Usage
