@@ -18,7 +18,7 @@ A command-line tool that provides a unified interface for running scripts across
 ## Installation / Upgrade
 
 ```bash
-deno install -gf -n uni-run \
+deno install -grf -n uni-run \
   --allow-read=.,$HOME/.cache/uni-run \
   --allow-write=$HOME/.cache/uni-run \
   --allow-env=HOME,USERPROFILE \
@@ -26,7 +26,7 @@ deno install -gf -n uni-run \
   jsr:@miyaoka/uni-run/cli
 ```
 
-> Note: The `-f` flag forces overwriting of any existing installation. You can safely run this command for first-time installation or to upgrade to the latest version.
+> Note: The `-f` flag forces overwriting of any existing installation. The `-r` flag forces reloading all dependencies, ensuring you get the latest version. You can safely run this command for first-time installation or to upgrade to the latest version.
 
 Permissions are restricted for better security:
 

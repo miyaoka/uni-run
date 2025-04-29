@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.1] - 2025-04-30
+
+### Changed
+
+- Updated installation instructions to include `-r` flag for reliable version upgrades
+
 ## [0.3.0] - 2025-04-30
 
 ### Added
@@ -24,7 +30,7 @@ All notable changes to this project will be documented in this file.
 - Improved CLI argument handling for different package managers
 - Better command-line help with examples
 
-## [0.1.0] - 2025-04-01
+## [0.1.0] - 2025-04-29
 
 ### Added
 
