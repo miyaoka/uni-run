@@ -2,7 +2,12 @@ import { join } from "@std/path";
 import { exists, ensureDir } from "@std/fs";
 
 // Cache directory settings
-const HOME_DIR = Deno.env.get("HOME") || Deno.env.get("USERPROFILE") || "~";
+const HOME_DIR = Deno.env.get("HOME") || Deno.env.get("USERPROFILE");
+if (!HOME_DIR) {
+  throw new Error(
+    "HOME or USERPROFILE environment variable must be set to use cache feature"
+  );
+}
 const CACHE_DIR = join(HOME_DIR, ".cache", "uni-run");
 const CACHE_FILE = join(CACHE_DIR, "cache.json");
 

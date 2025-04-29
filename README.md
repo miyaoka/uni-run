@@ -18,8 +18,24 @@ A command-line tool that provides a unified interface for running scripts across
 ### Install from JSR
 
 ```bash
-deno install -g -A -n uni-run jsr:@miyaoka/uni-run/cli
+deno install -g -n uni-run \
+  --allow-read=.,$HOME/.cache/uni-run \
+  --allow-write=$HOME/.cache/uni-run \
+  --allow-env=HOME,USERPROFILE \
+  --allow-run=npm,yarn,pnpm,bun,deno \
+  jsr:@miyaoka/uni-run/cli
 ```
+
+Permissions are restricted for better security:
+
+- `--allow-read=.,$HOME/.cache/uni-run`: Only read from current directory and cache
+  - Required to detect project type and read stored preferences
+- `--allow-write=$HOME/.cache/uni-run`: Only write to cache directory
+  - Required to save script selection history
+- `--allow-env=HOME,USERPROFILE`: Only access specific environment variables
+  - Required to locate user's home directory for cache
+- `--allow-run=npm,yarn,pnpm,bun,deno`: Only run specific package managers
+  - Required to execute scripts with the appropriate package manager
 
 ### Uninstall
 
