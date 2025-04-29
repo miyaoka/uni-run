@@ -7,6 +7,11 @@ import denoJson from "../deno.json" with { type: "json" };
 
 const VERSION = denoJson.version;
 
+// Example (for uni-run --list test -- --watch):
+//   Options:           { list: true }      # Command options
+//   Arguments:         ["test"]            # Regular arguments (script name)
+//   Literal arguments: ["--watch"]         # Arguments after "--" (passed to script)
+
 // Define main command
 const cli = new Command()
   .name("uni-run")
@@ -14,10 +19,11 @@ const cli = new Command()
   .description(
     "Universal script runner for npm, yarn, pnpm, bun, and deno projects"
   )
-  .arguments("[command...:string]")
+  .arguments("[...args:string]")
   .option("-l, --list", "List available scripts")
-  .action(async (options, command) => {
-    const [script, ...args] = command || [];
+  .action(async function (options, ...args: Array<string>) {
+    // Extract script name from args (safely)
+    const script = args.length > 0 ? args[0] : undefined;
     const cwd = Deno.cwd();
     const projectType = await detectProjectType(cwd);
 
@@ -86,8 +92,8 @@ const cli = new Command()
         Deno.exit(1);
       }
 
-      // Run the script
-      await runner.runScript(script, args);
+      // Run the script with literal args
+      await runner.runScript(script, this.getLiteralArgs());
     }
   });
 

@@ -7,6 +7,7 @@
     "build": "echo 'Building npm project'",
     "test": "echo 'Testing npm project'",
     "long-script-name": "echo 'This is a script with a long name'",
-    "args": "echo 'Received args:' $*"
+    "args": "echo 'Received args:' $*",
+    "cal": "cal"
   }
 }

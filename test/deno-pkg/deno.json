@@ -8,6 +8,7 @@
     "build": "echo 'Building deno project'",
     "test": "echo 'Testing deno project'",
     "long-script-name": "echo 'This is a script with a long name'",
-    "args": "echo 'Received args:' $*"
+    "args": "echo 'Received args:' $1 $2 $3 $4 $5",
+    "cal": "cal"
   }
 }

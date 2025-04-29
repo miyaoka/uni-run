@@ -44,18 +44,17 @@ export function createYarnRunner(cwd: string): Runner {
   }
 
   /**
-   * Get command string for execution
-   */
-  function getCommandString(name: string): string {
-    return `yarn ${name}`;
-  }
-
-  /**
    * Run script
    */
   async function runScript(name: string, args: string[] = []): Promise<void> {
     // Add --silent flag to suppress extra output
-    const cmd = ["yarn", "--silent", name, ...args];
+    const cmd = ["yarn", "run", "--silent", name];
+
+    // Add arguments directly (Yarn 1.0+ doesn't require -- separator)
+    if (args.length > 0) {
+      cmd.push(...args);
+    }
+
     await executeCommand(cmd, cwd);
   }
 
@@ -63,7 +62,6 @@ export function createYarnRunner(cwd: string): Runner {
   return {
     getScripts,
     hasScript,
-    getCommandString,
     runScript,
   };
 }

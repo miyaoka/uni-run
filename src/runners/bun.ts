@@ -4,14 +4,14 @@ import { executeCommand } from "../utils.ts";
 import type { Runner, Script } from "../types.ts";
 
 /**
- * Bunプロジェクト用スクリプトランナーを作成
+ * Create script runner for Bun projects
  *
- * @param cwd 現在の作業ディレクトリ
- * @returns スクリプトランナーオブジェクト
+ * @param cwd Current working directory
+ * @returns Script runner object
  */
 export function createBunRunner(cwd: string): Runner {
   /**
-   * 利用可能なスクリプト一覧を取得
+   * Get list of available scripts
    */
   async function getScripts(): Promise<Script[]> {
     const packageJsonPath = join(cwd, "package.json");
@@ -36,7 +36,7 @@ export function createBunRunner(cwd: string): Runner {
   }
 
   /**
-   * 指定されたスクリプトが存在するか確認
+   * Check if the specified script exists
    */
   async function hasScript(name: string): Promise<boolean> {
     const scripts = await getScripts();
@@ -44,26 +44,24 @@ export function createBunRunner(cwd: string): Runner {
   }
 
   /**
-   * 実行コマンド文字列を取得
-   */
-  function getCommandString(name: string): string {
-    return `bun run ${name}`;
-  }
-
-  /**
-   * スクリプトを実行
+   * Run script
    */
   async function runScript(name: string, args: string[] = []): Promise<void> {
-    // --silentフラグを追加して余分な出力を抑制
-    const cmd = ["bun", "run", "--silent", name, ...args];
+    // Add --silent flag to suppress extra output
+    const cmd = ["bun", "run", "--silent", name];
+
+    // Add -- separator before script arguments if any exist
+    if (args.length > 0) {
+      cmd.push("--", ...args);
+    }
+
     await executeCommand(cmd, cwd);
   }
 
-  // スクリプトランナーオブジェクトを返す
+  // Return script runner object
   return {
     getScripts,
     hasScript,
-    getCommandString,
     runScript,
   };
 }

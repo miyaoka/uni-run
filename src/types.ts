@@ -26,11 +26,6 @@ export interface Runner {
   hasScript(name: string): Promise<boolean>;
 
   /**
-   * Get command string for execution
-   */
-  getCommandString(name: string): string;
-
-  /**
    * Run script
    */
   runScript(name: string, args: string[]): Promise<void>;
