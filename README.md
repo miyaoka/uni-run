@@ -9,11 +9,9 @@ A command-line tool that provides a unified interface for running scripts across
 
 ## Features
 
-- Automatic project type detection
+- Automatic project type detection (npm, yarn, pnpm, bun, deno)
 - Interactive script selection UI
 - Script selection history caching
-- Silent mode to suppress extra output
-- Support for multiple package managers (npm, yarn, pnpm, bun, deno)
 
 ## Installation
 
@@ -64,9 +62,6 @@ uni-run --list
 ```bash
 # Run in development mode
 deno task dev
-
-# Run tests
-deno task test
 
 # Build binary
 deno task compile
