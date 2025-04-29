@@ -1,5 +1,6 @@
 {
   "name": "@example/deno-test-package",
+  "exports": {},
   "version": "1.0.0",
   "description": "Test package for uni-run (deno)",
   "tasks": {
