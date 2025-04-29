@@ -3,23 +3,29 @@ on:
   push:
     branches:
       - main
-    tags:
-      - "v*"
 
 jobs:
-  verify:
-    uses: ./.github/workflows/verify.yml # Call common verification workflow
-
   publish:
-    needs: verify
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # Needed to compare with the previous commit
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
+      - name: Check if version changed
+        id: version_check
+        run: |
+          if git diff HEAD^ -- deno.json | grep '"version":'; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Publish package
-        run: deno publish
+        if: steps.version_check.outputs.changed == 'true'
+        run: deno publish --allow-dirty

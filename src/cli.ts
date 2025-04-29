@@ -3,12 +3,13 @@ import { detectProjectType } from "./core/detector.ts";
 import { createRunner } from "./core/runner.ts";
 import { selectScript } from "./core/interactive.ts";
 import { getLastScript, saveCache } from "./core/cache.ts";
+import denoJson from "../deno.json" with { type: "json" };
 
-const VERSION = "0.1.0";
+const VERSION = denoJson.version;
 
 // Define main command
 const cli = new Command()
-  .name("urun")
+  .name("uni-run")
   .version(VERSION)
   .description(
     "Universal script runner for npm, yarn, pnpm, bun, and deno projects"
