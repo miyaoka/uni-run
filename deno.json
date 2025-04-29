@@ -29,6 +29,7 @@
   "imports": {
     "@cliffy/command": "jsr:@cliffy/command@^1.0.0-rc.7",
     "@cliffy/prompt": "jsr:@cliffy/prompt@^1.0.0-rc.7",
+    "@std/fmt": "jsr:@std/fmt@^1.0.7",
     "@std/fs": "jsr:@std/fs@^1.0.17",
     "@std/path": "jsr:@std/path@^1.0.9"
   }

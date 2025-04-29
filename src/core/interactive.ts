@@ -1,4 +1,5 @@
 import { Select } from "@cliffy/prompt";
+import { dim } from "@std/fmt/colors";
 import type { Script } from "../types.ts";
 
 /**
@@ -13,11 +14,10 @@ export async function selectScript(
   defaultScript?: string
 ): Promise<Script | null> {
   try {
-    // Create options for Cliffy's selection UI
+    // Create options for Cliffy's selection UI with formatted script names and commands
     const options = scripts.map((script) => ({
-      name: script.name,
+      name: `${script.name} ${dim(`- ${script.description}`)}`,
       value: script.name,
-      description: script.description,
     }));
 
     // Display interactive selection UI (with default value)
