@@ -39,11 +39,9 @@ Permissions are restricted for better security:
 - `--allow-run=npm,yarn,pnpm,bun,deno`: Only run specific package managers
   - Required to execute scripts with the appropriate package manager
 
-### What's new in v0.2.0
+### Recent Updates
 
-- Improved CLI argument handling for different package managers
-- Better command-line help with examples (`uni-run -h`)
-- Support for passing arguments to scripts (`uni-run test -- --watch`)
+See [CHANGELOG.md](./CHANGELOG.md) for detailed version history and updates.
 
 ### Uninstall
 
