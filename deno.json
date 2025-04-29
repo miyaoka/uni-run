@@ -12,7 +12,8 @@
     "test-npm": "cd test/npm-pkg && deno run --allow-read --allow-run --allow-env --allow-write ../../src/cli.ts",
     "test-yarn": "cd test/yarn-pkg && deno run --allow-read --allow-run --allow-env --allow-write ../../src/cli.ts",
     "test-pnpm": "cd test/pnpm-pkg && deno run --allow-read --allow-run --allow-env --allow-write ../../src/cli.ts",
-    "test-deno": "cd test/deno-pkg && deno run --allow-read --allow-run --allow-env --allow-write ../../src/cli.ts"
+    "test-deno": "cd test/deno-pkg && deno run --allow-read --allow-run --allow-env --allow-write ../../src/cli.ts",
+    "test-bun": "cd test/bun-pkg && deno run --allow-read --allow-run --allow-env --allow-write ../../src/cli.ts"
   },
   "fmt": {
     "indentWidth": 2,
