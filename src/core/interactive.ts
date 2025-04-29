@@ -32,7 +32,7 @@ export async function selectScript(
     return scripts.find((script) => script.name === selectedName) || null;
   } catch (error) {
     // ユーザーがCtrl+Cなどでキャンセルした場合
-    if (error.name === "AbortError") {
+    if (error instanceof Error && error.name === "AbortError") {
       return null;
     }
     throw error;

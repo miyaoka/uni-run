@@ -23,7 +23,9 @@ export async function loadCache(): Promise<ScriptCache> {
       return JSON.parse(content);
     }
   } catch (error) {
-    console.error("Failed to load cache:", error.message);
+    // エラーオブジェクトの型を安全にチェック
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    console.error("Failed to load cache:", errorMsg);
   }
   return {};
 }
@@ -51,7 +53,9 @@ export async function saveCache(
     // キャッシュを書き込み
     await Deno.writeTextFile(CACHE_FILE, JSON.stringify(cache, null, 2));
   } catch (error) {
-    console.error("Failed to save cache:", error.message);
+    // エラーオブジェクトの型を安全にチェック
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    console.error("Failed to save cache:", errorMsg);
   }
 }
 

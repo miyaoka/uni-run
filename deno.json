@@ -8,7 +8,7 @@
   "tasks": {
     "dev": "deno run --allow-read --allow-run --allow-env --allow-write src/cli.ts",
     "test": "deno test --allow-read --allow-run --allow-env --allow-write",
-    "compile": "deno compile --allow-read --allow-run --allow-env --allow-write -o urun src/cli.ts",
+    "compile": "deno compile --allow-read --allow-run --allow-env --allow-write -o dist/uni-run src/cli.ts",
     "test-npm": "cd test/npm-pkg && deno run --allow-read --allow-run --allow-env --allow-write ../../src/cli.ts",
     "test-yarn": "cd test/yarn-pkg && deno run --allow-read --allow-run --allow-env --allow-write ../../src/cli.ts",
     "test-pnpm": "cd test/pnpm-pkg && deno run --allow-read --allow-run --allow-env --allow-write ../../src/cli.ts",
