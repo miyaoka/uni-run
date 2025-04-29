@@ -6,6 +6,8 @@
     "start": "echo 'Starting bun project'",
     "build": "echo 'Building bun project'",
     "test": "echo 'Testing bun project'",
-    "long-script-name": "echo 'This is a script with a long name'"
+    "long-script-name": "echo 'This is a script with a long name'",
+    "args": "echo 'Received args:' $*",
+    "cal": "cal"
   }
 }

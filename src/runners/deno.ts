@@ -4,17 +4,17 @@ import { executeCommand } from "../utils.ts";
 import type { Runner, Script } from "../types.ts";
 
 /**
- * Denoプロジェクト用スクリプトランナーを作成
+ * Create script runner for Deno projects
  *
- * @param cwd 現在の作業ディレクトリ
- * @returns スクリプトランナーオブジェクト
+ * @param cwd Current working directory
+ * @returns Script runner object
  */
 export function createDenoRunner(cwd: string): Runner {
   /**
-   * 利用可能なスクリプト一覧を取得
+   * Get list of available scripts
    */
   async function getScripts(): Promise<Script[]> {
-    // deno.json または deno.jsonc を探す
+    // Look for deno.json or deno.jsonc
     let configPath = join(cwd, "deno.json");
     let exists1 = await exists(configPath);
 
@@ -43,7 +43,7 @@ export function createDenoRunner(cwd: string): Runner {
   }
 
   /**
-   * 指定されたスクリプトが存在するか確認
+   * Check if the specified script exists
    */
   async function hasScript(name: string): Promise<boolean> {
     const scripts = await getScripts();
@@ -51,26 +51,24 @@ export function createDenoRunner(cwd: string): Runner {
   }
 
   /**
-   * 実行コマンド文字列を取得
-   */
-  function getCommandString(name: string): string {
-    return `deno task ${name}`;
-  }
-
-  /**
-   * スクリプトを実行
+   * Run script
    */
   async function runScript(name: string, args: string[] = []): Promise<void> {
-    // --quietフラグを追加して余分な出力を抑制
-    const cmd = ["deno", "task", "--quiet", name, ...args];
+    // Add --quiet flag to suppress extra output
+    const cmd = ["deno", "task", "--quiet", name];
+
+    // Add arguments directly (Deno tasks don't use -- separator)
+    if (args.length > 0) {
+      cmd.push(...args);
+    }
+
     await executeCommand(cmd, cwd);
   }
 
-  // スクリプトランナーオブジェクトを返す
+  // Return script runner object
   return {
     getScripts,
     hasScript,
-    getCommandString,
     runScript,
   };
 }
