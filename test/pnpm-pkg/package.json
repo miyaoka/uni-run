@@ -1,0 +1,12 @@
+{
+  "name": "pnpm-test-package",
+  "version": "1.0.0",
+  "description": "Test package for uni-run (pnpm)",
+  "scripts": {
+    "start": "echo 'Starting pnpm project'",
+    "build": "echo 'Building pnpm project'",
+    "test": "echo 'Testing pnpm project'",
+    "long-script-name": "echo 'This is a script with a long name'",
+    "args": "echo 'Received args:' $*"
+  }
+}

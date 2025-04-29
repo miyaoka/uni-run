@@ -1,0 +1,11 @@
+lockfileVersion: "6.0"
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+  .:
+    specifiers: {}
+    dependencies: {}
+# Empty pnpm-lock.yaml for test purpose

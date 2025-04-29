@@ -1,0 +1,12 @@
+{
+  "name": "@example/deno-test-package",
+  "version": "1.0.0",
+  "description": "Test package for uni-run (deno)",
+  "tasks": {
+    "start": "echo 'Starting deno project'",
+    "build": "echo 'Building deno project'",
+    "test": "echo 'Testing deno project'",
+    "long-script-name": "echo 'This is a script with a long name'",
+    "args": "echo 'Received args:' $*"
+  }
+}

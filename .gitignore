@@ -1,0 +1,15 @@
+# Deno cache & build
+.npm/
+.deno/
+dist/
+build/
+tmp/
+.out/
+.cache/
+
+# Editor
+.vscode/
+.idea/
+
+# Logs
+*.log

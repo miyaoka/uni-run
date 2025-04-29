@@ -1,0 +1,33 @@
+{
+  "name": "@miyaoka/uni-run",
+  "version": "0.1.0",
+  "description": "Universal script runner for npm, yarn, pnpm, bun, and deno projects",
+  "exports": {
+    ".": "./src/cli.ts"
+  },
+  "tasks": {
+    "dev": "deno run --allow-read --allow-run src/cli.ts",
+    "test": "deno test --allow-read --allow-run",
+    "compile": "deno compile --allow-read --allow-run -o urun src/cli.ts",
+    "test-npm": "cd test/npm-pkg && deno run --allow-read --allow-run ../../src/cli.ts",
+    "test-yarn": "cd test/yarn-pkg && deno run --allow-read --allow-run ../../src/cli.ts",
+    "test-pnpm": "cd test/pnpm-pkg && deno run --allow-read --allow-run ../../src/cli.ts",
+    "test-deno": "cd test/deno-pkg && deno run --allow-read --allow-run ../../src/cli.ts"
+  },
+  "fmt": {
+    "indentWidth": 2,
+    "singleQuote": false,
+    "lineWidth": 100
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"]
+    }
+  },
+  "imports": {
+    "@cliffy/command": "jsr:@cliffy/command@^1.0.0-rc.7",
+    "@cliffy/prompt": "jsr:@cliffy/prompt@^1.0.0-rc.7",
+    "@std/fs": "jsr:@std/fs@^1.0.17",
+    "@std/path": "jsr:@std/path@^1.0.9"
+  }
+}

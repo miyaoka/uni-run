@@ -1,0 +1,12 @@
+{
+  "name": "yarn-test-package",
+  "version": "1.0.0",
+  "description": "Test package for uni-run (yarn)",
+  "scripts": {
+    "start": "echo 'Starting yarn project'",
+    "build": "echo 'Building yarn project'",
+    "test": "echo 'Testing yarn project'",
+    "long-script-name": "echo 'This is a script with a long name'",
+    "args": "echo 'Received args:' $*"
+  }
+}
