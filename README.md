@@ -40,7 +40,12 @@ Permissions are restricted for better security:
 ### Uninstall
 
 ```bash
+# Remove the executable
 deno uninstall -g uni-run
+
+# Remove cache directory (optional)
+# This cache stores your command selection history
+rm -rf $HOME/.cache/uni-run
 ```
 
 ## Usage
