@@ -54,7 +54,8 @@ export function createNpmRunner(cwd: string): Runner {
    * スクリプトを実行
    */
   async function runScript(name: string, args: string[] = []): Promise<void> {
-    const cmd = ["npm", "run", name, ...args];
+    // --silentフラグを追加して余分な出力を抑制
+    const cmd = ["npm", "run", "--silent", name, ...args];
     await executeCommand(cmd, cwd);
   }
 

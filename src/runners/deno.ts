@@ -61,7 +61,8 @@ export function createDenoRunner(cwd: string): Runner {
    * スクリプトを実行
    */
   async function runScript(name: string, args: string[] = []): Promise<void> {
-    const cmd = ["deno", "task", name, ...args];
+    // --quietフラグを追加して余分な出力を抑制
+    const cmd = ["deno", "task", "--quiet", name, ...args];
     await executeCommand(cmd, cwd);
   }
 

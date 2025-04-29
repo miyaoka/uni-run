@@ -54,7 +54,8 @@ export function createPnpmRunner(cwd: string): Runner {
    * スクリプトを実行
    */
   async function runScript(name: string, args: string[] = []): Promise<void> {
-    const cmd = ["pnpm", "run", name, ...args];
+    // --silentフラグを追加して余分な出力を抑制
+    const cmd = ["pnpm", "run", "--silent", name, ...args];
     await executeCommand(cmd, cwd);
   }
 
