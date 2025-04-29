@@ -1,8 +1,8 @@
 /**
- * コマンドを実行する
+ * Execute command
  *
- * @param cmd 実行するコマンドと引数の配列
- * @param cwd 作業ディレクトリ
+ * @param cmd Array of command and arguments to execute
+ * @param cwd Working directory
  */
 export async function executeCommand(
   cmd: string[],

@@ -1,10 +1,10 @@
 /**
- * サポートされているプロジェクトタイプ
+ * Supported project types
  */
 export type ProjectType = "npm" | "yarn" | "pnpm" | "bun" | "deno" | null;
 
 /**
- * スクリプト情報
+ * Script information
  */
 export interface Script {
   name: string;
@@ -12,26 +12,26 @@ export interface Script {
 }
 
 /**
- * スクリプト実行者インターフェース
+ * Script runner interface
  */
 export interface Runner {
   /**
-   * 利用可能なスクリプト一覧を取得
+   * Get list of available scripts
    */
   getScripts(): Promise<Script[]>;
 
   /**
-   * 指定されたスクリプトが存在するか確認
+   * Check if the specified script exists
    */
   hasScript(name: string): Promise<boolean>;
 
   /**
-   * 実行コマンド文字列を取得
+   * Get command string for execution
    */
   getCommandString(name: string): string;
 
   /**
-   * スクリプトを実行
+   * Run script
    */
   runScript(name: string, args: string[]): Promise<void>;
 }

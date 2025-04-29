@@ -1,20 +1,20 @@
 import { join } from "@std/path";
 import { exists, ensureDir } from "@std/fs";
 
-// キャッシュディレクトリの設定
+// Cache directory settings
 const HOME_DIR = Deno.env.get("HOME") || Deno.env.get("USERPROFILE") || "~";
 const CACHE_DIR = join(HOME_DIR, ".cache", "uni-run");
 const CACHE_FILE = join(CACHE_DIR, "cache.json");
 
-// キャッシュの型定義
+// Cache type definition
 interface ScriptCache {
-  [directory: string]: string; // ディレクトリパス → 選択したスクリプト名
+  [directory: string]: string; // Directory path -> Selected script name
 }
 
 /**
- * キャッシュを読み込む
+ * Load cache
  *
- * @returns キャッシュデータ
+ * @returns Cache data
  */
 export async function loadCache(): Promise<ScriptCache> {
   try {
@@ -23,7 +23,7 @@ export async function loadCache(): Promise<ScriptCache> {
       return JSON.parse(content);
     }
   } catch (error) {
-    // エラーオブジェクトの型を安全にチェック
+    // Safely check the type of error object
     const errorMsg = error instanceof Error ? error.message : String(error);
     console.error("Failed to load cache:", errorMsg);
   }
@@ -31,39 +31,39 @@ export async function loadCache(): Promise<ScriptCache> {
 }
 
 /**
- * キャッシュを保存
+ * Save cache
  *
- * @param directory 実行ディレクトリ
- * @param scriptName 選択したスクリプト名
+ * @param directory Working directory
+ * @param scriptName Selected script name
  */
 export async function saveCache(
   directory: string,
   scriptName: string
 ): Promise<void> {
   try {
-    // キャッシュディレクトリがなければ作成
+    // Create cache directory if it doesn't exist
     await ensureDir(CACHE_DIR);
 
-    // 既存のキャッシュを読み込み
+    // Load existing cache
     const cache = await loadCache();
 
-    // 新しい情報を追加
+    // Add new information
     cache[directory] = scriptName;
 
-    // キャッシュを書き込み
+    // Write cache to file
     await Deno.writeTextFile(CACHE_FILE, JSON.stringify(cache, null, 2));
   } catch (error) {
-    // エラーオブジェクトの型を安全にチェック
+    // Safely check the type of error object
     const errorMsg = error instanceof Error ? error.message : String(error);
     console.error("Failed to save cache:", errorMsg);
   }
 }
 
 /**
- * 実行ディレクトリに対応する前回のスクリプト選択を取得
+ * Get last selected script for the working directory
  *
- * @param directory 実行ディレクトリ
- * @returns 前回選択したスクリプト名、なければundefined
+ * @param directory Working directory
+ * @returns Last selected script name, or undefined if not found
  */
 export async function getLastScript(
   directory: string

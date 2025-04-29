@@ -6,7 +6,7 @@ import { getLastScript, saveCache } from "./core/cache.ts";
 
 const VERSION = "0.1.0";
 
-// メインコマンドの定義
+// Define main command
 const cli = new Command()
   .name("urun")
   .version(VERSION)
@@ -29,7 +29,7 @@ const cli = new Command()
 
     const runner = createRunner(projectType, cwd);
 
-    // スクリプト一覧表示
+    // Display script list
     if (options.list) {
       const scripts = await runner.getScripts();
       console.log(`Available scripts (${projectType}):`);
@@ -47,7 +47,7 @@ const cli = new Command()
       return;
     }
 
-    // スクリプト名が指定されていない場合はインタラクティブモード
+    // Use interactive mode if no script name is specified
     if (!script) {
       const scripts = await runner.getScripts();
 
@@ -56,10 +56,10 @@ const cli = new Command()
         Deno.exit(1);
       }
 
-      // 前回選択したスクリプトをキャッシュから取得
+      // Get the last selected script from cache
       const lastScript = await getLastScript(cwd);
 
-      // スクリプト選択UI表示（前回選択したスクリプトをデフォルト値として渡す）
+      // Display script selection UI (with last selected script as default)
       const selected = await selectScript(scripts, lastScript);
 
       if (!selected) {
@@ -67,17 +67,17 @@ const cli = new Command()
         Deno.exit(0);
       }
 
-      // 選択したスクリプトをキャッシュに保存
+      // Save selected script to cache
       await saveCache(cwd, selected.name);
 
-      // スクリプトを実行
+      // Run the script
       await runner.runScript(selected.name, []);
       return;
     }
 
-    // スクリプト名が指定されている場合
+    // If script name is specified
     if (script) {
-      // スクリプトが存在するか確認
+      // Check if the script exists
       if (!(await runner.hasScript(script))) {
         console.error(
           `Error: Script '${script}' not found in this ${projectType} project`
@@ -85,7 +85,7 @@ const cli = new Command()
         Deno.exit(1);
       }
 
-      // スクリプトを実行
+      // Run the script
       await runner.runScript(script, args);
     }
   });

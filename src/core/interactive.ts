@@ -2,36 +2,36 @@ import { Select } from "@cliffy/prompt";
 import type { Script } from "../types.ts";
 
 /**
- * インタラクティブにスクリプトを選択する
+ * Select script interactively
  *
- * @param scripts 選択可能なスクリプト一覧
- * @param defaultScript デフォルトで選択するスクリプト名
- * @returns 選択されたスクリプト、キャンセルされた場合はnull
+ * @param scripts List of available scripts
+ * @param defaultScript Default script name to select
+ * @returns Selected script, or null if cancelled
  */
 export async function selectScript(
   scripts: Script[],
   defaultScript?: string
 ): Promise<Script | null> {
   try {
-    // Cliffyの選択UIのためのオプションを作成
+    // Create options for Cliffy's selection UI
     const options = scripts.map((script) => ({
       name: script.name,
       value: script.name,
       description: script.description,
     }));
 
-    // インタラクティブ選択UIを表示（デフォルト値を設定）
+    // Display interactive selection UI (with default value)
     const selectedName = await Select.prompt<string>({
       message: "Select a script to run:",
       options,
-      default: defaultScript, // デフォルト選択を設定
-      search: true, // 検索機能を有効化
+      default: defaultScript, // Set default selection
+      search: true, // Enable search functionality
     });
 
-    // 選択結果からスクリプトオブジェクトを特定して返す
+    // Find and return script object from selection result
     return scripts.find((script) => script.name === selectedName) || null;
   } catch (error) {
-    // ユーザーがCtrl+Cなどでキャンセルした場合
+    // Handle cancellation (e.g., user pressed Ctrl+C)
     if (error instanceof Error && error.name === "AbortError") {
       return null;
     }
