@@ -14,7 +14,7 @@ export async function selectScript(
   defaultScript?: string
 ): Promise<Script | null> {
   try {
-    // Create options for Cliffy's selection UI with formatted script names and commands
+    // Create options for Cliffy's selection UI
     const options = scripts.map((script) => ({
       name: `${script.name} ${dim(`- ${script.description}`)}`,
       value: script.name,
@@ -26,6 +26,7 @@ export async function selectScript(
       options,
       default: defaultScript, // Set default selection
       search: true, // Enable search functionality
+      format: (name) => name, // Only display script name (no command) in default selection
     });
 
     // Find and return script object from selection result
