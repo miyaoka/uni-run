@@ -12,9 +12,11 @@ const cli = new Command()
   .description(
     "Universal script runner for npm, yarn, pnpm, bun, and deno projects"
   )
-  .arguments("[script] [script-args...:string]")
+  .arguments("[script:string] [...args:string]")
   .option("-l, --list", "List available scripts")
-  .action(async (options, script, scriptArgs) => {
+  .action(async (options, args = []) => {
+    const { list } = options;
+    const [script, ...scriptArgs] = args;
     const cwd = Deno.cwd();
     const projectType = await detectProjectType(cwd);
 
@@ -61,21 +63,28 @@ const cli = new Command()
         Deno.exit(0);
       }
 
-      // ここで重要なポイント: スクリプトを実行せずにコマンド文字列を表示して終了
-      console.log(`\x1b[1A\x1b[Kurun ${selected.name}`);
-      Deno.exit(0);
+      // ランナーからコマンド文字列を取得して表示
+      const cmdString = runner.getCommandString(selected.name);
+      console.log(`\x1b[1A\x1b[K${cmdString}`);
+
+      // スクリプトを実行
+      await runner.runScript(selected.name, []);
+      return;
     }
 
-    // スクリプトが存在するか確認
-    if (!(await runner.hasScript(script))) {
-      console.error(
-        `Error: Script '${script}' not found in this ${projectType} project`
-      );
-      Deno.exit(1);
-    }
+    // スクリプト名が指定されている場合
+    if (script) {
+      // スクリプトが存在するか確認
+      if (!(await runner.hasScript(script))) {
+        console.error(
+          `Error: Script '${script}' not found in this ${projectType} project`
+        );
+        Deno.exit(1);
+      }
 
-    // スクリプトを実行
-    await runner.runScript(script, Array.isArray(scriptArgs) ? scriptArgs : []);
+      // スクリプトを実行
+      await runner.runScript(script, scriptArgs || []);
+    }
   });
 
 if (import.meta.main) {

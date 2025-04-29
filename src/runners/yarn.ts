@@ -44,6 +44,13 @@ export function createYarnRunner(cwd: string): Runner {
   }
 
   /**
+   * 実行コマンド文字列を取得
+   */
+  function getCommandString(name: string): string {
+    return `yarn ${name}`;
+  }
+
+  /**
    * スクリプトを実行
    */
   async function runScript(name: string, args: string[] = []): Promise<void> {
@@ -55,6 +62,7 @@ export function createYarnRunner(cwd: string): Runner {
   return {
     getScripts,
     hasScript,
+    getCommandString,
     runScript,
   };
 }

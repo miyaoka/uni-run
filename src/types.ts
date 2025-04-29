@@ -26,6 +26,11 @@ export interface Runner {
   hasScript(name: string): Promise<boolean>;
 
   /**
+   * 実行コマンド文字列を取得
+   */
+  getCommandString(name: string): string;
+
+  /**
    * スクリプトを実行
    */
   runScript(name: string, args: string[]): Promise<void>;
