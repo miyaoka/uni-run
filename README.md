@@ -12,6 +12,8 @@ A command-line tool that provides a unified interface for running scripts across
 - Automatic project type detection (npm, yarn, pnpm, bun, deno)
 - Interactive script selection UI
 - Script selection history caching
+  - Remembers your last used script for each project directory
+  - Makes repetitive script execution faster by pre-selecting your previously used script
 
 ## Installation
 
