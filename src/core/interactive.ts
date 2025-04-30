@@ -11,7 +11,7 @@ import type { Script } from "../types.ts";
  */
 export async function selectScript(
   scripts: Script[],
-  defaultScript?: string
+  defaultScript?: string,
 ): Promise<Script | null> {
   try {
     // Create options for Cliffy's selection UI

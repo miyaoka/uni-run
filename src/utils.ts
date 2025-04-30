@@ -6,7 +6,7 @@
  */
 export async function executeCommand(
   cmd: string[],
-  cwd: string
+  cwd: string,
 ): Promise<void> {
   const [executable, ...args] = cmd;
   const command = new Deno.Command(executable, {

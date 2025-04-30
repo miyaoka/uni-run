@@ -1,11 +1,11 @@
 import { join } from "@std/path";
-import { exists, ensureDir } from "@std/fs";
+import { ensureDir, exists } from "@std/fs";
 
 // Cache directory settings
 const HOME_DIR = Deno.env.get("HOME") || Deno.env.get("USERPROFILE");
 if (!HOME_DIR) {
   throw new Error(
-    "HOME or USERPROFILE environment variable must be set to use cache feature"
+    "HOME or USERPROFILE environment variable must be set to use cache feature",
   );
 }
 const CACHE_DIR = join(HOME_DIR, ".cache", "uni-run");
@@ -43,7 +43,7 @@ export async function loadCache(): Promise<ScriptCache> {
  */
 export async function saveCache(
   directory: string,
-  scriptName: string
+  scriptName: string,
 ): Promise<void> {
   try {
     // Create cache directory if it doesn't exist
@@ -71,7 +71,7 @@ export async function saveCache(
  * @returns Last selected script name, or undefined if not found
  */
 export async function getLastScript(
-  directory: string
+  directory: string,
 ): Promise<string | undefined> {
   const cache = await loadCache();
   return cache[directory];
