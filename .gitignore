@@ -8,7 +8,8 @@ tmp/
 .cache/
 
 # Editor
-.vscode/
+.vscode/*
+!.vscode/settings.template.json
 .idea/
 
 # Logs
