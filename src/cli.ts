@@ -18,7 +18,7 @@ const cli = new Command()
   .version(VERSION)
   .versionOption("-v, --version", "Show version information")
   .description(
-    "Universal script runner for npm, yarn, pnpm, bun, and deno projects"
+    "Universal script runner for npm, yarn, pnpm, bun, and deno projects",
   )
   .usage("[options] [script] [--args]")
   .arguments("[...args:string]")
@@ -35,7 +35,7 @@ const cli = new Command()
 
     if (!projectType) {
       console.error(
-        "Error: Could not detect project type. Are you in a valid project directory?"
+        "Error: Could not detect project type. Are you in a valid project directory?",
       );
       Deno.exit(1);
     }
@@ -93,7 +93,7 @@ const cli = new Command()
       // Check if the script exists
       if (!(await runner.hasScript(script))) {
         console.error(
-          `Error: Script '${script}' not found in this ${projectType} project`
+          `Error: Script '${script}' not found in this ${projectType} project`,
         );
         Deno.exit(1);
       }

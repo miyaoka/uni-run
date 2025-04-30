@@ -5,7 +5,9 @@
 
 > Universal script runner for npm, yarn, pnpm, bun, and deno projects
 
-A command-line tool that provides a unified interface for running scripts across different package managers (npm, yarn, pnpm, bun, deno). It automatically detects the project type and executes scripts with the appropriate commands.
+A command-line tool that provides a unified interface for running scripts across different package
+managers (npm, yarn, pnpm, bun, deno). It automatically detects the project type and executes
+scripts with the appropriate commands.
 
 ## Features
 
@@ -26,7 +28,9 @@ deno install -grf -n uni-run \
   jsr:@miyaoka/uni-run/cli
 ```
 
-> Note: The `-f` flag forces overwriting of any existing installation. The `-r` flag forces reloading all dependencies, ensuring you get the latest version. You can safely run this command for first-time installation or to upgrade to the latest version.
+> Note: The `-f` flag forces overwriting of any existing installation. The `-r` flag forces
+> reloading all dependencies, ensuring you get the latest version. You can safely run this command
+> for first-time installation or to upgrade to the latest version.
 
 Permissions are restricted for better security:
 
@@ -92,6 +96,9 @@ uni-run start -- --port 3000
 ## Development
 
 ```bash
+# Copy settings.template.json to settings.json for VSCode configuration
+cp .vscode/settings.template.json .vscode/settings.json
+
 # Run in development mode
 deno task dev
 
