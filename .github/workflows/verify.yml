@@ -14,3 +14,5 @@ jobs:
         run: deno check src/**/*.ts
       - name: Lint code
         run: deno lint
+      - name: Check formatting
+        run: deno fmt --check
