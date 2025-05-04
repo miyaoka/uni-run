@@ -70,7 +70,7 @@ const cli = new Command()
       }
 
       // Get the last selected script from cache
-      const lastScript = await getLastScript(cwd);
+      const lastScript = getLastScript(cwd);
 
       // Display script selection UI (with last selected script as default)
       const selected = await selectScript(scripts, lastScript);
@@ -81,7 +81,7 @@ const cli = new Command()
       }
 
       // Save selected script to cache
-      await saveCache(cwd, selected.name);
+      saveCache(cwd, selected.name);
 
       // Run the script
       await runner.runScript(selected.name, []);

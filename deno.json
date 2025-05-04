@@ -1,20 +1,20 @@
 {
   "name": "@miyaoka/uni-run",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "license": "MIT",
   "description": "Universal script runner for npm, yarn, pnpm, bun, and deno projects",
   "exports": {
     "./cli": "./src/cli.ts"
   },
   "tasks": {
-    "dev": "deno run --allow-read --allow-run --allow-env --allow-write src/cli.ts",
-    "test": "deno test --allow-read --allow-run --allow-env --allow-write",
-    "compile": "deno compile --allow-read --allow-run --allow-env --allow-write -o dist/uni-run src/cli.ts",
-    "test-npm": "cd test/npm-pkg && deno run --allow-read --allow-run --allow-env --allow-write ../../src/cli.ts",
-    "test-yarn": "cd test/yarn-pkg && deno run --allow-read --allow-run --allow-env --allow-write ../../src/cli.ts",
-    "test-pnpm": "cd test/pnpm-pkg && deno run --allow-read --allow-run --allow-env --allow-write ../../src/cli.ts",
-    "test-deno": "cd test/deno-pkg && deno run --allow-read --allow-run --allow-env --allow-write ../../src/cli.ts",
-    "test-bun": "cd test/bun-pkg && deno run --allow-read --allow-run --allow-env --allow-write ../../src/cli.ts"
+    "dev": "deno run --allow-read --allow-run src/cli.ts",
+    "test": "deno test --allow-read --allow-run",
+    "compile": "deno compile --allow-read --allow-run -o dist/uni-run src/cli.ts",
+    "test-npm": "cd test/npm-pkg && deno run --allow-read --allow-run ../../src/cli.ts",
+    "test-yarn": "cd test/yarn-pkg && deno run --allow-read --allow-run ../../src/cli.ts",
+    "test-pnpm": "cd test/pnpm-pkg && deno run --allow-read --allow-run ../../src/cli.ts",
+    "test-deno": "cd test/deno-pkg && deno run --allow-read --allow-run ../../src/cli.ts",
+    "test-bun": "cd test/bun-pkg && deno run --allow-read --allow-run ../../src/cli.ts"
   },
   "fmt": {
     "indentWidth": 2,
