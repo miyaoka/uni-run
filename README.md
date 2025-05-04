@@ -21,9 +21,7 @@ scripts with the appropriate commands.
 
 ```bash
 deno install -grf -n uni-run \
-  --allow-read=.,$HOME/.cache/uni-run \
-  --allow-write=$HOME/.cache/uni-run \
-  --allow-env=HOME,USERPROFILE \
+  --allow-read=. \
   --allow-run=npm,yarn,pnpm,bun,deno \
   jsr:@miyaoka/uni-run/cli
 ```
@@ -34,12 +32,8 @@ deno install -grf -n uni-run \
 
 Permissions are restricted for better security:
 
-- `--allow-read=.,$HOME/.cache/uni-run`: Only read from current directory and cache
-  - Required to detect project type and read stored preferences
-- `--allow-write=$HOME/.cache/uni-run`: Only write to cache directory
-  - Required to save script selection history
-- `--allow-env=HOME,USERPROFILE`: Only access specific environment variables
-  - Required to locate user's home directory for cache
+- `--allow-read=.`: Only read from current directory
+  - Required to detect project type
 - `--allow-run=npm,yarn,pnpm,bun,deno`: Only run specific package managers
   - Required to execute scripts with the appropriate package manager
 
@@ -52,10 +46,6 @@ See [CHANGELOG.md](./CHANGELOG.md) for detailed version history and updates.
 ```bash
 # Remove the executable
 deno uninstall -g uni-run
-
-# Remove cache directory (optional)
-# This cache stores your command selection history
-rm -rf $HOME/.cache/uni-run
 ```
 
 ## Usage

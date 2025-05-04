@@ -1,38 +1,25 @@
-import { join } from "@std/path";
-import { ensureDir, exists } from "@std/fs";
-
-// Cache directory settings
-const HOME_DIR = Deno.env.get("HOME") || Deno.env.get("USERPROFILE");
-if (!HOME_DIR) {
-  throw new Error(
-    "HOME or USERPROFILE environment variable must be set to use cache feature",
-  );
-}
-const CACHE_DIR = join(HOME_DIR, ".cache", "uni-run");
-const CACHE_FILE = join(CACHE_DIR, "cache.json");
-
 // Cache type definition
 interface ScriptCache {
   [directory: string]: string; // Directory path -> Selected script name
 }
+
+const STORAGE_KEY = "uni-run-cache";
 
 /**
  * Load cache
  *
  * @returns Cache data
  */
-export async function loadCache(): Promise<ScriptCache> {
+export function loadCache(): ScriptCache {
   try {
-    if (await exists(CACHE_FILE)) {
-      const content = await Deno.readTextFile(CACHE_FILE);
-      return JSON.parse(content);
-    }
+    const cacheData = localStorage.getItem(STORAGE_KEY);
+    return cacheData ? JSON.parse(cacheData) : {};
   } catch (error) {
     // Safely check the type of error object
     const errorMsg = error instanceof Error ? error.message : String(error);
     console.error("Failed to load cache:", errorMsg);
+    return {};
   }
-  return {};
 }
 
 /**
@@ -41,22 +28,19 @@ export async function loadCache(): Promise<ScriptCache> {
  * @param directory Working directory
  * @param scriptName Selected script name
  */
-export async function saveCache(
+export function saveCache(
   directory: string,
   scriptName: string,
-): Promise<void> {
+): void {
   try {
-    // Create cache directory if it doesn't exist
-    await ensureDir(CACHE_DIR);
-
     // Load existing cache
-    const cache = await loadCache();
+    const cache = loadCache();
 
     // Add new information
     cache[directory] = scriptName;
 
-    // Write cache to file
-    await Deno.writeTextFile(CACHE_FILE, JSON.stringify(cache, null, 2));
+    // Write cache to localStorage
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cache));
   } catch (error) {
     // Safely check the type of error object
     const errorMsg = error instanceof Error ? error.message : String(error);
@@ -70,9 +54,9 @@ export async function saveCache(
  * @param directory Working directory
  * @returns Last selected script name, or undefined if not found
  */
-export async function getLastScript(
+export function getLastScript(
   directory: string,
-): Promise<string | undefined> {
-  const cache = await loadCache();
+): string | undefined {
+  const cache = loadCache();
   return cache[directory];
 }
